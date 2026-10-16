@@ -2,7 +2,7 @@
 
 A back-office for loan applications: a loan officer creates an application, an underwriter reviews it, a head of department approves it.
 
-> **Status:** early development. This is a learning project. I'm using it to learn Vue, NestJS and GraphQL on a realistic banking domain, step by step. The roadmap below shows what is done and what is planned.
+> **Status:** planned. This is the capstone of my learning path: I first build smaller projects (a todo API that grows from JSON-file storage to PostgreSQL, Redis and Celery, plus a Vue client), then build this one from scratch.
 
 ## What it does
 
@@ -35,27 +35,23 @@ stateDiagram-v2
 
 ## Stack
 
-| Layer | Technologies | Status |
-|---|---|---|
-| Frontend | Vue 3.5 (Composition API, `<script setup>`), TypeScript, Vite | in progress |
-| | Vue Router, Pinia | planned |
-| | GraphQL: Apollo Client + GraphQL Code Generator | planned |
-| Backend | NestJS, GraphQL (code-first), DataLoader | planned |
-| Database | PostgreSQL in Docker | planned |
-| Auth | argon2, JWT access and refresh tokens in httpOnly cookies, refresh rotation, roles | planned |
-| Tests | Vitest, Vue Test Utils, supertest | planned |
-| Later | microservices with `@nestjs/microservices`, RabbitMQ | planned |
+| Layer | Technologies |
+|---|---|
+| Backend | Python 3.13, Django 5.2 LTS, Django REST Framework, SimpleJWT |
+| Database | PostgreSQL in Docker |
+| Cache and background jobs | Redis, Celery |
+| Frontend | Vue 3 (Composition API, `<script setup>`), TypeScript, Vite, Vue Router, Pinia |
+| Infrastructure | Docker, Docker Compose, nginx, gunicorn |
+| Tests | pytest-django, Vitest |
 
-## Roadmap
+## Planned features
 
-- [ ] **0. Setup:** Vue + TypeScript project
-- [ ] **1. Loan calculator:** annuity and differentiated payments with a full payment schedule
-- [ ] **1.5. GraphQL basics:** queries, mutations and error handling with plain `fetch`
-- [ ] **2. Applications UI:** list, details and a multi-step form on a mocked GraphQL API
-- [ ] **3. Backend:** NestJS GraphQL API, PostgreSQL, status transitions, N+1 handled with DataLoader
-- [ ] **4. Auth and roles:** login, refresh rotation, role-based access, maker-checker, audit log
-- [ ] **5. Tests:** component, unit and e2e
-- [ ] **6. Microservices:** scoring service, event-driven notifications with RabbitMQ, a separate auth service
+- [ ] **Accounts and ledger:** double-entry bookkeeping, balances calculated from entries, transfers inside `transaction.atomic` with row locking, idempotency keys against double charges
+- [ ] **Loan applications:** status workflow, roles, maker-checker, audit log, payment schedule calculated on the server with `Decimal`
+- [ ] **Background jobs:** monthly payment accrual with Celery beat, notifications, caching
+- [ ] **UI:** Vue interface for applications and accounts, role-based
+- [ ] **Ready to run:** tests, `docker compose up`, deployment
+- [ ] **Later:** split notifications and scoring into separate services with RabbitMQ, an outbox and a gateway
 
 ## Getting started
 
@@ -68,12 +64,14 @@ npm install
 npm run dev
 ```
 
+Backend instructions will be added when the backend is started.
+
 ## Project structure
 
 ```
 loan-desk/
-├── frontend/   # Vue app
-└── backend/    # NestJS API
+├── backend/    # Django + DRF API
+└── frontend/   # Vue app
 ```
 
 ## Author
