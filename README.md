@@ -51,6 +51,7 @@ stateDiagram-v2
 - [ ] **Background jobs:** monthly payment accrual with Celery beat, notifications, caching
 - [ ] **UI:** Vue interface for applications and accounts, role-based
 - [ ] **Ready to run:** tests, `docker compose up`, deployment
+- [ ] **Optional:** a GraphQL API for reads (Strawberry), next to REST
 - [ ] **Later:** split notifications and scoring into separate services with RabbitMQ, an outbox and a gateway
 
 ## Getting started
